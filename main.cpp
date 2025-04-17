@@ -117,7 +117,14 @@ public:
     MenuScene() {
         std::cout << "Menu Scene: Press 's' to start the game.\n";
     }
-    void update(float deltaTime) override {}
+    void update(float deltaTime) override {
+        position += velocity * deltaTime;
+        // movement 20x10 bounds
+        if (position.x < 0) position.x = 0;
+        if (position.x > 19) position.x = 19; // 9 -> 19
+        if (position.y < 0) position.y = 0;
+        if (position.y > 9) position.y = 9;
+        }
     void render() const override {
         std::cout << "=== Menu Scene ===\n";
         std::cout << "Press 's' to start.\n";
@@ -190,6 +197,11 @@ int main() {
         std::cout << "Command (w: jump, a: left, d: right, s: start, q: quit): ";
         char input;
         std::cin >> input;
+        // Input control         
+        if (input != 'w' && input != 'a' && input != 'd' && input != 's' && input != 'q') {
+            std::cout << "Invalid command! Please use w, a, d, s or q .\n";
+            continue; // Back to beggining of the cycle
+}
 
         if (dynamic_cast<MenuScene*>(sceneManager.getCurrentScene())) {
             if (input == 's') {
