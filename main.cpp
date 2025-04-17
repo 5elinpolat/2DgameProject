@@ -118,7 +118,6 @@ public:
         std::cout << "Menu Scene: Press 's' to start the game.\n";
     }
     void update(float deltaTime) override {
-        position += velocity * deltaTime;
         // movement 20x10 bounds
         if (position.x < 0) position.x = 0;
         if (position.x > 19) position.x = 19; // 9 -> 19
